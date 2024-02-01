@@ -28,6 +28,29 @@ def main_menu():
     """)
     div()
 
+def config_menu():
+        print("""        
+                                Menu de Configuracion
+                            -----------------------------
+                            
+                        Para continuar, seleccione una opcion.
+
+
+
+
+                                1. Reiniciar contraseña
+
+
+                        2. Modificar limite de intentos y errores
+
+
+                              3. Volver al menu principal
+
+    """)
+        div()
+        option = int(input("\t\t\t\tSeleccione una opcion: "))
+        return option
+
 def option_title(option):
     clear()
     div()

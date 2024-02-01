@@ -1,6 +1,6 @@
 from output import *
 from utilities import path, startup, database_init
-from modules import login,signup
+from modules import login, signup, config
 
 dir = path()
 settings = startup(dir)
@@ -36,7 +36,10 @@ while settings.outer_loop ==  True:
                 div()
                 break
         elif option == 3:
-            ...
+            results = config(dir, settings, option)
+            if results == False:
+                div()
+                break
         elif option == 4:
             option_title(option)
             settings.outer_loop=exit()

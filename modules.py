@@ -119,5 +119,26 @@ def signup(path, settings, option):
                 settings.inner_loop = False
                 return True
 
-def reset_password():
-    ...
+def config(path, settings, option):
+    option_title(option)
+    choice = config_menu()
+    if choice == 1:
+        reset_password()
+    elif choice == 2:
+        clear()
+        div()
+        if settings.set_error_policy(path):
+            div()
+            if settings.set_try_policy(path):
+                return True
+            else:
+                return False
+        else:
+            return False
+    else:
+        return
+    
+def reset_password(path):
+    with open(path + '/database.json') as database:
+        db = json.load(database)
+    
