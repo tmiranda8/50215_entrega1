@@ -1,5 +1,5 @@
 # Primera pre-entrega del proyecto final
-Este repositorio corresponde al proyecto asociado a la primer actividad del curso "Python" dictado la Digital School "Coderhouse".
+Este repositorio corresponde a la primer actividad del curso "Python" dictado en **Coderhouse** Digital School.
 
 ## Objetivo
 Hacer uso de funciones. Diseñar la estructura de un programa dedicado al registro de usuarios.
@@ -7,8 +7,37 @@ Hacer uso de funciones. Diseñar la estructura de un programa dedicado al regist
 ## Consigna
 Crear un programa que permita el registro y almacenamiento de usuarios en una base de datos, siguiendo los siguientes requisitos:
  - Una función para almacenamiento de datos
- - Una función para consulta de datos
  - Almacenar las credenciales utilizando diccionarios, bajo el formato **key:value**
+ - Una función para consulta de datos
  - Una función para realizar inicios de sesión
+
+## Implementación
+El diseño de lo solicitado se llevó a cabo en un programa modular y utilizando objetos. 
+
+Se añadieron las siguientes funcionalidades:
+ - Interfaz gráfica rudimentaria.
+ - Reinicio de contraseña, mediante un factor de seguridad.
+ - Posibilidad de almacenar un (1) dato de seguridad, que le permita al usuario habilitar la funcionalidad de reincio de contraseña.
+ - Políticas de manejo en la cantidad de intentos y/o errores cometidos, configurable por el usuario. 
+    - Se define por única vez en el primer arranque.
+    - Los valores elegidos se almacenan en un archivo.
+    - Luego se cargan cada vez que se ejecute el programa.
+ - Menú de configuraciones, que permite:
+    - Reiniciar la contraseña de determinado usuario.
+    - Configurar el límite de intentos y errores permitidos.
+
+### Estructura del programa
+El script principal del sistema es `main.py`, encargado de orquestar el arranque y funcionamiento del menu. El resto de código se divide como sigue:
+| Funcionalidades             | Script                |
+| ----------------- | ------------------ |
+|Opciones del menu y funcionalidades asociadas|`modules.py`|
+|Funciones de impresión de pantalla|`output.py`| 
+|Objeto que administra el manejo del sistema |`settings.py`|
+|Inicialización del sistema, variables y bases de datos|`utilities.py`|
+
+
+
+
+
 
 

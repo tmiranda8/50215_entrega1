@@ -1,10 +1,14 @@
 import json
 from output import *
 
-def credentials():
-    user=str(input("Ingrese nombre de usuario: "))
-    pw = str(input("Ingrese password: "))
-    return [user, pw]
+def credentials(mode = True):
+    if mode:
+        user=str(input("Ingrese nombre de usuario: "))
+        pw = str(input("Ingrese password: "))
+        return [user, pw]
+    else:
+        user=str(input("Ingrese nombre de usuario: "))
+        return user
 
 def go_back(settings):
     choice = str(input("\t\t\tDesea volver al menu principal? (y/n): "))
@@ -123,7 +127,10 @@ def config(path, settings, option):
     option_title(option)
     choice = config_menu()
     if choice == 1:
-        reset_password()
+        clear()
+        div()
+        user_data = credentials(False)
+        return reset_password(path, settings, user_data)
     elif choice == 2:
         clear()
         div()
@@ -135,10 +142,37 @@ def config(path, settings, option):
                 return False
         else:
             return False
+    elif choice == 3:
+        clear()
+        option_title(5)
+        database(path, settings)
+        div()
+        if go_back(settings):
+            return True
+        else: 
+            return False
     else:
-        return
-    
-def reset_password(path):
+        return True
+
+def reset_password(path, settings, user_data):
     with open(path + '/database.json') as database:
         db = json.load(database)
-    
+        settings.inner_loop = True
+    if settings.inner_loop == True:
+        find = user_data in db['clientes']
+        if find:
+            auth = str(input('\n\t\t\tIngrese su dato de recuperacion: '))
+            if auth == db['clientes'][user_data]['name']:
+                new_password = str(input('Ingrese su nueva contraseña: '))
+                with open(path + '/database.json', 'w') as database:
+                    db['clientes'][user_data].update({'pw':new_password,'name':auth})
+                    json.dump(db, database)
+                return True
+            else:
+                div()
+                print("\t  Su dato de recuperacion es incorrecto. Vuelva a intentarlo mas tarde")
+                return False
+        else:
+            div()
+            print('\t\t\t\tEl usuario ingresado no existe')
+            return False
