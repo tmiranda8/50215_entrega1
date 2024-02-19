@@ -1,5 +1,5 @@
 import json
-from output import *
+from core.output import *
 
 def credentials(mode = True):
     if mode:
@@ -87,12 +87,12 @@ def signup(path, settings, option):
         user_check = user_data[0] in db['clientes']
         if user_check == False:
             if reset_feature():
-                print('\t\t\tEl dato de recuperacion sera su nombre real.')
+                print('\t\t\tEl dato de recuperacion debe ser un valor alfanumerico')
                 auth = str(input('\t\t\tIngrese su dato de recuperacion: '))
                 div()
                 user_data.append(auth)
                 with open(path + '/database.json', 'w') as database:
-                    db['clientes'].update({user_data[0]:{'pw':user_data[1], 'name':user_data[2]}})
+                    db['clientes'].update({user_data[0]:{'pw':user_data[1], 'recovery':user_data[2]}})
                     json.dump(db, database)
                     settings.inner_loop = False 
             else:
@@ -162,10 +162,10 @@ def reset_password(path, settings, user_data):
         find = user_data in db['clientes']
         if find:
             auth = str(input('\n\t\t\tIngrese su dato de recuperacion: '))
-            if auth == db['clientes'][user_data]['name']:
+            if auth == db['clientes'][user_data]['recovery']:
                 new_password = str(input('Ingrese su nueva contraseña: '))
                 with open(path + '/database.json', 'w') as database:
-                    db['clientes'][user_data].update({'pw':new_password,'name':auth})
+                    db['clientes'][user_data].update({'pw':new_password,'recovery':auth})
                     json.dump(db, database)
                 return True
             else:
@@ -176,3 +176,5 @@ def reset_password(path, settings, user_data):
             div()
             print('\t\t\t\tEl usuario ingresado no existe')
             return False
+
+

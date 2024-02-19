@@ -1,4 +1,4 @@
-from utilities import clear
+from core.utilities import clear
 import json
 
 menu={1:"Iniciar sesion", 2:"Registrarse", 3:'Opciones', 4:"\tSalir", 5:"Base de datos"}

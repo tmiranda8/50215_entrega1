@@ -1,5 +1,6 @@
 import os, json
-import settings as setting_tools
+import core.settings as setting_tools
+import core.clients
 
 def clear():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -41,3 +42,13 @@ def startup(path):
         settings.set_error_policy(path)
         settings.set_try_policy(path)
     return settings
+
+def load_objects(path):
+    with open(path + '/database.json') as database:
+        db = json.load(database)
+    for users in db['clientes']:
+        pass
+
+def save_objects(path):
+    ...
+

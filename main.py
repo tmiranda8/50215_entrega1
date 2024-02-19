@@ -1,6 +1,7 @@
-from output import *
-from utilities import path, startup, database_init
-from modules import login, signup, config
+import core
+from core.output import *
+from core.utilities import path, startup, database_init
+from core.modules import login, signup, config
 
 dir = path()
 settings = startup(dir)
@@ -45,5 +46,5 @@ while settings.outer_loop ==  True:
             settings.outer_loop=exit()
         settings.inner_loop = False
 
-# cd C:\Users\RTX\Desktop\python\50215\entrega_1\
+# cd C:\Users\RTX\Desktop\python\50215\entregas\
 # py main.py
