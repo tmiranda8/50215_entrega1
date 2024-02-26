@@ -1,6 +1,6 @@
 import os, json
 import core.settings as setting_tools
-import core.clients
+import core.output
 
 def clear():
     os.system('cls' if os.name=='nt' else 'clear')
@@ -16,9 +16,8 @@ def database_init(path):
     else:
         try:
             with open(path + '/database.json', 'x') as db:
-                init={'clientes':{'admin':{'pw':'admin','name':'administrador'}}}
+                init={"clientes": {"admin": {"pw": "admin", "name":"administrador", "surname":"", "age":"", "email":"", "recovery": None},}}
                 json.dump(init, db)
-                print('No se ha encontrado una base de datos preexistente. Base de datos inicializada.')
         except:
             print ('    Se produjo un error inesperado (database). Consulte con el administrador')
             return False
@@ -40,15 +39,7 @@ def startup(path):
             limits = {'error_limit':0,'try_limit':0}
             json.dump(limits, settings_file)
         settings.set_error_policy(path)
+        core.output.div()
         settings.set_try_policy(path)
     return settings
-
-def load_objects(path):
-    with open(path + '/database.json') as database:
-        db = json.load(database)
-    for users in db['clientes']:
-        pass
-
-def save_objects(path):
-    ...
 

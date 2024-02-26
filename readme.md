@@ -1,4 +1,4 @@
-#Entregas
+# Entregas
 Este repositorio corresponde a la primer y segunda actividad del curso "Python" dictado en **Coderhouse** Digital School.
 
 ## Primera pre-entrega del proyecto final

@@ -34,5 +34,3 @@ class Policy:
             with open(path + '/settings.json', 'w') as settings_file:
                 json.dump(copy, settings_file)
             return True
-
-

@@ -1,0 +1,1 @@
+{"clientes": {"admin": {"pw": "admin", "name": "administrador", "surname": "", "age": "", "email": "", "recovery": null}, "tom": {"pw": "tom", "name": "tomas", "surname": "miranda", "age": 27, "email": "", "recovery": "2fa"}, "wasa": {"pw": "re", "name": "", "surname": "", "age": "", "email": "", "recovery": null}}}

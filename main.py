@@ -2,9 +2,11 @@ import core
 from core.output import *
 from core.utilities import path, startup, database_init
 from core.modules import login, signup, config
+from core.manage import load_users, save_users
 
 dir = path()
 settings = startup(dir)
+objects = load_users(dir)
 db_check = database_init(dir)
 settings.outer_loop = db_check
 
@@ -16,34 +18,40 @@ while settings.outer_loop ==  True:
         option = 0
     finally:
         if option == 0:
-            ...
+            settings.errors+=1
+            if settings.errors == settings.error_limit:
+                div()
+                print("\t\t\t\t    Opcion invalida")
+                settings.outer_loop = menu_error()
+                break
         elif option == 1:
-            results = login(dir, settings, option)
+            settings.tries = 0 ; settings.errors = 0
+            results = login(settings, option, objects)
             if results == True:
                 success()
                 break
-            elif results == 'try_limit':
-                print(f"\t Ha superado el límite de intentos ({settings.tries}). Vuelva a intentarlo mas tarde")
-                div()
-                break
-            elif results == 'error_limit':
-                print(f"     Ha superado la cantidad de errores permitidos ({settings.errors}). Vuelva a intentarlo mas tarde")
-                div()
+            elif results == False:
                 break
         elif option == 2:
-            results = signup(dir, settings, option)
+            settings.tries = 0 ; settings.errors = 0
+            results = signup(settings, option, objects)
             if results == True:
-                print(f"\t Ha superado el límite de intentos ({settings.tries}). Vuelva a intentarlo mas tarde")
-                div()
+                save_users(dir, objects)
+            elif results == False:
                 break
         elif option == 3:
-            results = config(dir, settings, option)
+            settings.tries = 0 ; settings.errors = 0
+            results = config(dir, settings, option, objects)
             if results == False:
-                div()
                 break
         elif option == 4:
+            save_users(dir, objects)
             option_title(option)
-            settings.outer_loop=exit()
+            settings.outer_loop = exit()
+        else:
+            settings.tries+=1
+            if settings.tries == settings.try_limit:
+                settings.outer_loop = menu_error()
         settings.inner_loop = False
 
 # cd C:\Users\RTX\Desktop\python\50215\entregas\

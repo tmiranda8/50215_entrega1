@@ -53,18 +53,12 @@ def config_menu():
 
     """)
         div()
-        option = int(input("\t\t\t\tSeleccione una opcion: "))
-        return option
-
-def database(path, settings):
-    with open(path + '/database.json') as database:
-        db = json.load(database)
-        settings.inner_loop = True
-    if settings.inner_loop == True:
-        i=0
-        for clients in db['clientes']:
-            i+=1
-            print(f"      |\t\t Usuario {i}: {clients} \t | \t Contraseña: {db['clientes'][clients]['pw']}\t\t|")
+        try:
+            choice = int(input("\t\t\t\tSeleccione una opcion: "))
+        except:
+            pass
+        else:
+            return choice
 
 def option_title(option):
     clear()
@@ -82,3 +76,54 @@ def success():
     div()
     print("\t\t\t     Ha iniciado sesión correctamente!")
     div()
+
+def menu_error():
+    div()
+    print("\t    Ha superado el límite de intentos. Vuelva a intentarlo mas tarde")
+    div()
+    return False
+
+def signup_error(mode):
+    if mode == 0:
+        div()
+        print('\t\tEl usuario ingresado ya existe. Elija otro nombre de usuario.\n')
+        print('\t\t\tSi olvido su contraseña, puede restablecerla.\n')
+        print('\t\tEn caso contrario, pongase en contacto con el administrador.')
+        div()
+    elif mode == 1:
+        div()
+        print('\t\tEl usuario ingresado ya existe. Elija otro nombre de usuario.\n')
+        print("\t\t\t  Esta por alcanzar el limite de intentos.")
+        div()
+    elif mode == 2:
+        div()
+        print("\t    Ha superado el límite de intentos. Vuelva a intentarlo mas tarde")
+        div()
+
+def login_error(mode):
+    if mode == 0:
+        div()
+        print("\tHa ingresado una contraseña incorrecta, por favor vuelva a intentarlo")
+        div()
+    elif mode == 1:
+        div()
+        print("\t\tNo existe el usuario ingresado. Por favor vuelva a intentarlo")
+        div()
+    elif mode == 2:
+        div()
+        print("\t\t\tEsta por alcanzar el limite de intentos.")
+        div()
+    elif mode == 'try_limit':
+        div()
+        print("\t    Ha superado el límite de intentos. Vuelva a intentarlo mas tarde")
+        div()
+    elif mode == 'error_limit':
+        div()
+        print("     Ha superado la cantidad de errores permitidos. Vuelva a intentarlo mas tarde")
+        div()
+
+def config_error(mode):
+    if mode == 'error_limit':
+        div()
+        print("     Ha superado la cantidad de errores permitidos. Vuelva a intentarlo mas tarde")
+        div()
